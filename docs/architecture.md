@@ -28,6 +28,30 @@ Daedalus provides an automation and intelligence layer around existing technical
 
 Those systems may expose data or controlled interfaces to Daedalus later.
 
+## Current n8n Deployment Baseline
+
+The initial Daedalus orchestration engine is a self-hosted n8n deployment running as a Docker Compose workload on the existing COC server.
+
+Security and reliability controls implemented for the baseline include:
+
+- n8n application traffic is bound to host loopback rather than directly exposed on the LAN.
+- HTTPS access is provided through the existing Caddy reverse proxy.
+- Host firewall rules restrict the HTTPS service to approved LAN and VPN networks.
+- n8n persistent application state is stored in a named Docker volume.
+- The existing n8n encryption key is explicitly preserved through a protected local environment file; the key itself is never committed to Git.
+- Unverified/community packages are disabled.
+- The n8n public API is disabled for the current deployment because it is not required by the initial workflows.
+- High-risk nodes such as command execution and local-file trigger functionality remain excluded.
+- A dedicated SQLite backup process uses SQLite's online backup mechanism rather than copying a live database file directly.
+- Every generated database backup is subjected to `PRAGMA integrity_check` before it is accepted.
+- Backup files are permission-restricted and retained locally for seven days.
+- A systemd timer executes the n8n database backup daily at 05:00 America/Toronto, independent of the server's UTC system timezone.
+- The server's existing broader backup system subsequently protects the n8n configuration directory and generated database backups as part of the home-directory backup scope.
+
+The deployment was verified with a running container, successful HTTPS response through Caddy, successful manual and systemd-triggered SQLite backups, database integrity checks, and n8n's built-in security audit.
+
+Private hostnames, addresses, encryption material, credentials, and other environment-specific secrets are intentionally omitted from this public documentation.
+
 ## Logical Layers
 
 ### 1. Source Layer
