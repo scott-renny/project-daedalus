@@ -2,7 +2,9 @@
 
 > Personal Automation & Intelligence Engineering Platform
 
-**Status:** 🟡 Foundation / Active Development  
+**Project status:** 🟡 Active Development  
+**Platform foundation (DAE-001):** 🟢 Complete  
+**Current work (DAE-002):** 🟡 Module 01 — Cybersecurity Intelligence Pipeline  
 **Primary orchestration:** n8n  
 **Repository:** Public portfolio and engineering documentation
 
@@ -93,9 +95,13 @@ Workflow exports will only be committed after review for credentials, tokens, in
 
 ## Current Milestone
 
-### Milestone 1 — Foundation + Cybersecurity Intelligence
+### DAE-001 — Secure n8n Platform Foundation — 🟢 Complete
 
-The first implementation milestone establishes the n8n platform and builds Module 01 from the ground up. The goal is not merely an RSS-to-email workflow. The completed pipeline will progressively include source ingestion, normalization, duplicate handling, relevance/risk ranking, concise summaries, report generation, delivery, error handling, and an archive suitable for later analysis.
+The secure self-hosted n8n foundation is established, including HTTPS and reverse-proxy protection, restricted network access, persistent storage, secure encryption-key handling, automated integrity-checked backups, and a documented security baseline.
+
+### DAE-002 — Module 01: Cybersecurity Intelligence Pipeline — 🟡 In Development
+
+Current work is building Module 01 from the ground up. The goal is not merely an RSS-to-email workflow. The pipeline will progressively include source ingestion, normalization, duplicate handling, relevance and risk ranking, concise summaries, report generation, delivery, error handling, and an archive suitable for later analysis.
 
 ## Portfolio Objectives
 
