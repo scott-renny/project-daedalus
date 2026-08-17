@@ -82,7 +82,10 @@ project-daedalus/
 │   ├── roadmap.md
 │   └── adr/
 ├── workflows/
-│   └── README.md
+│   ├── README.md
+│   └── 01-cyber-intelligence/
+│       ├── README.md
+│       └── DAE-002-01-cyber-intelligence-daily.sanitized.json
 ├── schemas/
 │   └── README.md
 ├── tests/

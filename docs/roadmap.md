@@ -12,7 +12,7 @@ This roadmap is intentionally capability-driven. A module is marked complete onl
 - [x] Establish secrets/configuration conventions
 - [x] Establish workflow export/sanitization process
 
-## Phase 1 — Cybersecurity Intelligence Pipeline
+## Phase 1 — Cybersecurity Intelligence Pipeline — Complete
 
 - [x] Select trustworthy free sources
 - [x] Schedule ingestion
@@ -25,8 +25,15 @@ This roadmap is intentionally capability-driven. A module is marked complete onl
 - [x] Generate readable HTML email
 - [x] Deliver report
 - [x] Add execution/error handling
-- [ ] Archive sanitized result metadata
-- [ ] Document and test the workflow
+- [x] Publish a sanitized workflow export
+- [x] Document and test the workflow
+
+### Optional Module 01 Enhancements
+
+- [ ] Archive privacy-safe intelligence history
+- [ ] Add regression fixtures for scoring and transformation logic
+- [ ] Add a rolling seven-day Threat Trend Radar
+- [ ] Detect cross-source CVE and campaign confirmation
 
 ## Phase 2 — Certification Lifecycle Manager
 

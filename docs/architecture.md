@@ -52,6 +52,23 @@ The deployment was verified with a running container, successful HTTPS response 
 
 Private hostnames, addresses, encryption material, credentials, and other environment-specific secrets are intentionally omitted from this public documentation.
 
+## Implemented Module 01 — Cyber Intelligence Daily
+
+DAE-002-01 is the first completed production workflow on the Daedalus platform. It runs daily at 07:00 America/Toronto and can also be executed manually for controlled testing.
+
+The workflow:
+
+- Ingests six public security RSS feeds plus the NIST NVD and CISA KEV APIs.
+- Normalizes source-specific records into a shared intelligence schema.
+- Filters records to the relevant collection window.
+- Merges eight branches and removes duplicates within the current batch and across previous executions.
+- Applies deterministic cybersecurity priority scoring and records explainable score reasons.
+- Sorts results, selects the ten highest-ranked stories, and prepares concise report content.
+- Generates and delivers a responsive HTML intelligence briefing through SMTP.
+- Uses source retries and a separate Error Trigger workflow for failure notification.
+
+The public workflow export is inactive by default and excludes credential bindings, personal email addresses, private error-workflow references, instance identifiers, and pinned execution data.
+
 ## Logical Layers
 
 ### 1. Source Layer
