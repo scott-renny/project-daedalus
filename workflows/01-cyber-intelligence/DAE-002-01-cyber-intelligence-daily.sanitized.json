@@ -1,0 +1,1708 @@
+{
+  "name": "DAE-002-01 — Cyber Intelligence Daily",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        544
+      ],
+      "id": "9d07a60d-cea5-4def-9bed-524a27db93c7",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://www.bleepingcomputer.com/feed/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "ea9cb30b-99d3-458e-a10c-1c0da5b51c86",
+      "name": "Source — BleepingComputer",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "085f9651-ed0f-467b-a53d-59248dbf1717",
+              "name": "source",
+              "value": "BleepingComputer",
+              "type": "string"
+            },
+            {
+              "id": "d947a788-a8bd-4b2d-a5f4-5f2334aca688",
+              "name": "source_type",
+              "value": "news",
+              "type": "string"
+            },
+            {
+              "id": "594b5a3a-dfdb-4a5b-baae-944db7fd0356",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "f41f432d-8e6e-41fc-ade1-2c68507a25c9",
+              "name": "url",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "bdcbfbc2-4d77-4fdf-a57e-c09e8ae361ed",
+              "name": "published_at",
+              "value": "={{ $json.isoDate }}",
+              "type": "string"
+            },
+            {
+              "id": "3b021ae1-c629-4aad-aa7a-efc4ab0be05b",
+              "name": "summary_raw",
+              "value": "={{ $json.contentSnippet || $json.content || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "2a815e55-7a3b-4f2f-b5b2-01dcb69fe4e0",
+              "name": "author",
+              "value": "={{ $json.creator || $json[\"dc:creator\"] || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "6400d39b-e22a-46a5-b6ed-f5ce0e40397f",
+              "name": "categories",
+              "value": "={{ ($json.categories || []).join(\", \") }}",
+              "type": "string"
+            },
+            {
+              "id": "2073cac5-56dd-47a8-8436-dbe3b18b67af",
+              "name": "source_id",
+              "value": "={{ $json.guid || $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "90cbb604-f9f0-4396-b924-8ab5292957d9",
+              "name": "ingested_at",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        400,
+        0
+      ],
+      "id": "e58cd56d-26c2-4004-a92e-9be9d0706d61",
+      "name": "Normalize — BleepingComputer"
+    },
+    {
+      "parameters": {
+        "url": "https://isc.sans.edu/rssfeed.xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        112,
+        -176
+      ],
+      "id": "1da5e51c-be2b-4ee5-b0c6-7fae99ad1312",
+      "name": "Source — SANS ISC",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "085f9651-ed0f-467b-a53d-59248dbf1717",
+              "name": "source",
+              "value": "SANS ISC",
+              "type": "string"
+            },
+            {
+              "id": "d947a788-a8bd-4b2d-a5f4-5f2334aca688",
+              "name": "source_type",
+              "value": "threat_intelligence",
+              "type": "string"
+            },
+            {
+              "id": "594b5a3a-dfdb-4a5b-baae-944db7fd0356",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "f41f432d-8e6e-41fc-ade1-2c68507a25c9",
+              "name": "url",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "bdcbfbc2-4d77-4fdf-a57e-c09e8ae361ed",
+              "name": "published_at",
+              "value": "={{ $json.isoDate }}",
+              "type": "string"
+            },
+            {
+              "id": "3b021ae1-c629-4aad-aa7a-efc4ab0be05b",
+              "name": "summary_raw",
+              "value": "={{ $json.contentSnippet || $json[\"content:encodedSnippet\"] || $json.content || $json[\"content:encoded\"] || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "2a815e55-7a3b-4f2f-b5b2-01dcb69fe4e0",
+              "name": "author",
+              "value": "={{ $json.creator || $json[\"dc:creator\"] || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "6400d39b-e22a-46a5-b6ed-f5ce0e40397f",
+              "name": "categories",
+              "value": "={{ ($json.categories || []).join(\", \") }}",
+              "type": "string"
+            },
+            {
+              "id": "2073cac5-56dd-47a8-8436-dbe3b18b67af",
+              "name": "source_id",
+              "value": "={{ $json.guid || $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "90cbb604-f9f0-4396-b924-8ab5292957d9",
+              "name": "ingested_at",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        320,
+        -176
+      ],
+      "id": "e080c7fc-7557-4c98-afcb-b30db6f86021",
+      "name": "Normalize — SANS ISC"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "3684565a-1631-4a06-966e-428ee869b155",
+              "leftValue": "={{ $json.published_at }}",
+              "rightValue": "={{ $now.minus({ hours: 24 }).toISO() }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        576,
+        0
+      ],
+      "id": "eae1da52-a1d2-4117-b3b9-e008aef45715",
+      "name": "Filter — BleepingComputer — Last 24 Hours"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "3684565a-1631-4a06-966e-428ee869b155",
+              "leftValue": "={{ $json.published_at }}",
+              "rightValue": "={{ $now.minus({ hours: 24 }).toISO() }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        528,
+        -176
+      ],
+      "id": "fad39625-95e9-4520-9e29-1fd44374c864",
+      "name": "Filter — SANS ISC — Last 24 Hours"
+    },
+    {
+      "parameters": {
+        "numberInputs": 8
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1088,
+        672
+      ],
+      "id": "f88a21f8-476e-462b-8f1f-dd80e53f454f",
+      "name": "Merge — Fresh Articles"
+    },
+    {
+      "parameters": {
+        "url": "https://www.microsoft.com/en-us/security/blog/feed/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        112,
+        176
+      ],
+      "id": "239367cb-fac9-4fa7-8c23-f5387e552e2a",
+      "name": "Source — Microsoft Security",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "085f9651-ed0f-467b-a53d-59248dbf1717",
+              "name": "source",
+              "value": "Microsoft Security",
+              "type": "string"
+            },
+            {
+              "id": "d947a788-a8bd-4b2d-a5f4-5f2334aca688",
+              "name": "source_type",
+              "value": "vendor_security",
+              "type": "string"
+            },
+            {
+              "id": "594b5a3a-dfdb-4a5b-baae-944db7fd0356",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "f41f432d-8e6e-41fc-ade1-2c68507a25c9",
+              "name": "url",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "bdcbfbc2-4d77-4fdf-a57e-c09e8ae361ed",
+              "name": "published_at",
+              "value": "={{ $json.isoDate }}",
+              "type": "string"
+            },
+            {
+              "id": "3b021ae1-c629-4aad-aa7a-efc4ab0be05b",
+              "name": "summary_raw",
+              "value": "={{ $json.contentSnippet || $json[\"content:encodedSnippet\"] || $json.content || $json[\"content:encoded\"] || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "2a815e55-7a3b-4f2f-b5b2-01dcb69fe4e0",
+              "name": "author",
+              "value": "={{ $json.creator || $json[\"dc:creator\"] || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "6400d39b-e22a-46a5-b6ed-f5ce0e40397f",
+              "name": "categories",
+              "value": "={{ ($json.categories || []).join(\", \") }}",
+              "type": "string"
+            },
+            {
+              "id": "2073cac5-56dd-47a8-8436-dbe3b18b67af",
+              "name": "source_id",
+              "value": "={{ $json.guid || $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "90cbb604-f9f0-4396-b924-8ab5292957d9",
+              "name": "ingested_at",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        304,
+        176
+      ],
+      "id": "e31ff6fd-5ef9-4f4f-8b95-8df882d0cf92",
+      "name": "Normalize — Microsoft Security"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "3684565a-1631-4a06-966e-428ee869b155",
+              "leftValue": "={{ $json.published_at }}",
+              "rightValue": "={{ $now.minus({ hours: 24 }).toISO() }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        496,
+        176
+      ],
+      "id": "f21d0c1b-34ac-44ff-a259-97602b1101a3",
+      "name": "Filter — Microsoft Security — Last 24 Hours"
+    },
+    {
+      "parameters": {
+        "url": "https://blog.talosintelligence.com/rss/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        96,
+        400
+      ],
+      "id": "cc104a93-04f6-408f-bd36-d06e9d270f97",
+      "name": "Source — Cisco Talos",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "085f9651-ed0f-467b-a53d-59248dbf1717",
+              "name": "source",
+              "value": "Cisco Talos",
+              "type": "string"
+            },
+            {
+              "id": "d947a788-a8bd-4b2d-a5f4-5f2334aca688",
+              "name": "source_type",
+              "value": "threat_research",
+              "type": "string"
+            },
+            {
+              "id": "594b5a3a-dfdb-4a5b-baae-944db7fd0356",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "f41f432d-8e6e-41fc-ade1-2c68507a25c9",
+              "name": "url",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "bdcbfbc2-4d77-4fdf-a57e-c09e8ae361ed",
+              "name": "published_at",
+              "value": "={{ $json.isoDate }}",
+              "type": "string"
+            },
+            {
+              "id": "3b021ae1-c629-4aad-aa7a-efc4ab0be05b",
+              "name": "summary_raw",
+              "value": "={{ $json.contentSnippet || $json[\"content:encodedSnippet\"] || $json.content || $json[\"content:encoded\"] || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "2a815e55-7a3b-4f2f-b5b2-01dcb69fe4e0",
+              "name": "author",
+              "value": "={{ $json.creator || $json[\"dc:creator\"] || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "6400d39b-e22a-46a5-b6ed-f5ce0e40397f",
+              "name": "categories",
+              "value": "={{ ($json.categories || []).join(\", \") }}",
+              "type": "string"
+            },
+            {
+              "id": "2073cac5-56dd-47a8-8436-dbe3b18b67af",
+              "name": "source_id",
+              "value": "={{ $json.guid || $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "90cbb604-f9f0-4396-b924-8ab5292957d9",
+              "name": "ingested_at",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        288,
+        400
+      ],
+      "id": "966a9a6f-db5e-4e4b-b394-a920489595b7",
+      "name": "Normalize — Cisco Talos"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "3684565a-1631-4a06-966e-428ee869b155",
+              "leftValue": "={{ $json.published_at }}",
+              "rightValue": "={{ $now.minus({ hours: 24 }).toISO() }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        496,
+        400
+      ],
+      "id": "02a383b2-14d5-4a14-a340-967175bec30a",
+      "name": "Filter — Cisco Talos — Last 24 Hours"
+    },
+    {
+      "parameters": {
+        "url": "https://unit42.paloaltonetworks.com/feed/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        160,
+        576
+      ],
+      "id": "287522c4-fe67-484c-95c3-7ddc6eec6968",
+      "name": "Source — Unit 42",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "085f9651-ed0f-467b-a53d-59248dbf1717",
+              "name": "source",
+              "value": "Unit 42",
+              "type": "string"
+            },
+            {
+              "id": "d947a788-a8bd-4b2d-a5f4-5f2334aca688",
+              "name": "source_type",
+              "value": "threat_research",
+              "type": "string"
+            },
+            {
+              "id": "594b5a3a-dfdb-4a5b-baae-944db7fd0356",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "f41f432d-8e6e-41fc-ade1-2c68507a25c9",
+              "name": "url",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "bdcbfbc2-4d77-4fdf-a57e-c09e8ae361ed",
+              "name": "published_at",
+              "value": "={{ $json.isoDate }}",
+              "type": "string"
+            },
+            {
+              "id": "3b021ae1-c629-4aad-aa7a-efc4ab0be05b",
+              "name": "summary_raw",
+              "value": "={{ $json.contentSnippet || $json[\"content:encodedSnippet\"] || $json.content || $json[\"content:encoded\"] || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "2a815e55-7a3b-4f2f-b5b2-01dcb69fe4e0",
+              "name": "author",
+              "value": "={{ $json.creator || $json[\"dc:creator\"] || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "6400d39b-e22a-46a5-b6ed-f5ce0e40397f",
+              "name": "categories",
+              "value": "={{ ($json.categories || []).join(\", \") }}",
+              "type": "string"
+            },
+            {
+              "id": "2073cac5-56dd-47a8-8436-dbe3b18b67af",
+              "name": "source_id",
+              "value": "={{ $json.guid || $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "90cbb604-f9f0-4396-b924-8ab5292957d9",
+              "name": "ingested_at",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        352,
+        576
+      ],
+      "id": "aced5e9a-32dc-4fbf-818c-feb2311bd13d",
+      "name": "Normalize — Unit 42"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "3684565a-1631-4a06-966e-428ee869b155",
+              "leftValue": "={{ $json.published_at }}",
+              "rightValue": "={{ $now.minus({ hours: 24 }).toISO() }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        592,
+        576
+      ],
+      "id": "bbcef8a9-5067-4428-b5ef-f5ec5db3039a",
+      "name": "Filter — Unit 42 — Last 24 Hours"
+    },
+    {
+      "parameters": {
+        "url": "https://blog.cloudflare.com/rss/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        128,
+        752
+      ],
+      "id": "de3b0357-0669-4a92-a14b-1871032ba2b7",
+      "name": "Source — Cloudflare",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "085f9651-ed0f-467b-a53d-59248dbf1717",
+              "name": "source",
+              "value": "Cloudflare",
+              "type": "string"
+            },
+            {
+              "id": "d947a788-a8bd-4b2d-a5f4-5f2334aca688",
+              "name": "source_type",
+              "value": "cloud_security",
+              "type": "string"
+            },
+            {
+              "id": "594b5a3a-dfdb-4a5b-baae-944db7fd0356",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "f41f432d-8e6e-41fc-ade1-2c68507a25c9",
+              "name": "url",
+              "value": "={{ $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "bdcbfbc2-4d77-4fdf-a57e-c09e8ae361ed",
+              "name": "published_at",
+              "value": "={{ $json.isoDate }}",
+              "type": "string"
+            },
+            {
+              "id": "3b021ae1-c629-4aad-aa7a-efc4ab0be05b",
+              "name": "summary_raw",
+              "value": "={{ $json.contentSnippet || $json[\"content:encodedSnippet\"] || $json.content || $json[\"content:encoded\"] || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "2a815e55-7a3b-4f2f-b5b2-01dcb69fe4e0",
+              "name": "author",
+              "value": "={{ $json.creator || $json[\"dc:creator\"] || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "6400d39b-e22a-46a5-b6ed-f5ce0e40397f",
+              "name": "categories",
+              "value": "={{ ($json.categories || []).join(\", \") }}",
+              "type": "string"
+            },
+            {
+              "id": "2073cac5-56dd-47a8-8436-dbe3b18b67af",
+              "name": "source_id",
+              "value": "={{ $json.guid || $json.link }}",
+              "type": "string"
+            },
+            {
+              "id": "90cbb604-f9f0-4396-b924-8ab5292957d9",
+              "name": "ingested_at",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        320,
+        752
+      ],
+      "id": "2d73ea4d-6505-4e62-9a2e-126c4c3db048",
+      "name": "Normalize — Cloudflare"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "3684565a-1631-4a06-966e-428ee869b155",
+              "leftValue": "={{ $json.published_at }}",
+              "rightValue": "={{ $now.minus({ hours: 24 }).toISO() }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "after"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        544,
+        752
+      ],
+      "id": "5eee4739-01fc-427a-b8af-52e985b4c517",
+      "name": "Filter — Cloudflare — Last 24 Hours"
+    },
+    {
+      "parameters": {
+        "url": "https://services.nvd.nist.gov/rest/json/cves/2.0",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "pubStartDate",
+              "value": "={{ $now.minus({ hours: 24 }).toUTC().toISO() }}"
+            },
+            {
+              "name": "pubEndDate",
+              "value": "={{ $now.toUTC().toISO() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        176,
+        976
+      ],
+      "id": "46f47acd-95d9-4bf4-868c-a03a485dfb81",
+      "name": "Source — NIST NVD CVEs",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "vulnerabilities",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        368,
+        976
+      ],
+      "id": "287f9c74-77e9-468f-9748-a6118f526971",
+      "name": "Split — NVD Vulnerabilities"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fb975f20-af13-4a5f-9c74-5e21dabefb1a",
+              "name": "source",
+              "value": "NIST NVD",
+              "type": "string"
+            },
+            {
+              "id": "c6de991b-03b6-4b35-a084-d4b12f7c4b2d",
+              "name": "title",
+              "value": "={{ $json.cve.id + \" — \" + ($json.cve.affected?.[0]?.affectedData?.[0]?.product || \"New vulnerability\") }}",
+              "type": "string"
+            },
+            {
+              "id": "6a2befb2-009c-4471-8929-e45315a80ed8",
+              "name": "source_type",
+              "value": "vulnerability",
+              "type": "string"
+            },
+            {
+              "id": "ac30dfd3-38a3-44cc-9de2-33465b18279d",
+              "name": "url",
+              "value": "={{ \"https://nvd.nist.gov/vuln/detail/\" + $json.cve.id }}",
+              "type": "string"
+            },
+            {
+              "id": "fe26da8f-86d6-4744-913e-ef89402ac7a5",
+              "name": "published_at",
+              "value": "={{ $json.cve.published }}",
+              "type": "string"
+            },
+            {
+              "id": "87f8ed2d-a49d-4782-bcd6-ba8437424d54",
+              "name": "summary_raw",
+              "value": "={{ ($json.cve.descriptions || []).find(d => d.lang === \"en\")?.value || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "d71ce855-4950-42d2-ab94-8e1c04ec2294",
+              "name": "author",
+              "value": "={{ $json.cve.sourceIdentifier || \"NIST NVD\" }}",
+              "type": "string"
+            },
+            {
+              "id": "d17f754f-b262-4ce8-a480-110c206cd43b",
+              "name": "categories",
+              "value": "Vulnerability, NVD",
+              "type": "string"
+            },
+            {
+              "id": "3ec190c1-3087-4555-ba84-07123cc6b3b3",
+              "name": "source_id",
+              "value": "={{ $json.cve.id }}",
+              "type": "string"
+            },
+            {
+              "id": "0d1998fd-b0a2-4c4c-a674-81946cd3ad75",
+              "name": "ingested_at",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "4496365c-03a0-48a8-9863-f445d093b7e4",
+              "name": "cve_id",
+              "value": "={{ $json.cve.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        560,
+        960
+      ],
+      "id": "297be1c0-a1b7-4af4-b90a-f459e096ddce",
+      "name": "Normalize — NIST NVD CVEs"
+    },
+    {
+      "parameters": {
+        "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        64,
+        1184
+      ],
+      "id": "f7f57f4e-acac-4325-933a-b09c3cb4ce24",
+      "name": "Source — CISA KEV",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "vulnerabilities",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        304,
+        1184
+      ],
+      "id": "989b9c1f-fa15-4f0a-90f2-d0957d6e81e1",
+      "name": "Split — CISA KEV Entries"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fb975f20-af13-4a5f-9c74-5e21dabefb1a",
+              "name": "source",
+              "value": "CISA KEV",
+              "type": "string"
+            },
+            {
+              "id": "c6de991b-03b6-4b35-a084-d4b12f7c4b2d",
+              "name": "title",
+              "value": "={{ $json.cveID + \" — \" + $json.vulnerabilityName }}",
+              "type": "string"
+            },
+            {
+              "id": "6a2befb2-009c-4471-8929-e45315a80ed8",
+              "name": "source_type",
+              "value": "known_exploited_vulnerability",
+              "type": "string"
+            },
+            {
+              "id": "ac30dfd3-38a3-44cc-9de2-33465b18279d",
+              "name": "url",
+              "value": "={{ \"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" }}",
+              "type": "string"
+            },
+            {
+              "id": "fe26da8f-86d6-4744-913e-ef89402ac7a5",
+              "name": "published_at",
+              "value": "={{ $json.dateAdded + \"T00:00:00.000Z\" }}",
+              "type": "string"
+            },
+            {
+              "id": "87f8ed2d-a49d-4782-bcd6-ba8437424d54",
+              "name": "summary_raw",
+              "value": "={{ $json.shortDescription + \" Required action: \" + $json.requiredAction }}",
+              "type": "string"
+            },
+            {
+              "id": "d71ce855-4950-42d2-ab94-8e1c04ec2294",
+              "name": "author",
+              "value": "=CISA",
+              "type": "string"
+            },
+            {
+              "id": "d17f754f-b262-4ce8-a480-110c206cd43b",
+              "name": "categories",
+              "value": "={{ \"Known Exploited Vulnerability\" + ($json.knownRansomwareCampaignUse === \"Known\" ? \", Ransomware\" : \"\") + (($json.cwes || []).length ? \", \" + $json.cwes.join(\", \") : \"\") }}",
+              "type": "string"
+            },
+            {
+              "id": "3ec190c1-3087-4555-ba84-07123cc6b3b3",
+              "name": "source_id",
+              "value": "={{ $json.cveID }}",
+              "type": "string"
+            },
+            {
+              "id": "0d1998fd-b0a2-4c4c-a674-81946cd3ad75",
+              "name": "ingested_at",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "4496365c-03a0-48a8-9863-f445d093b7e4",
+              "name": "cve_id",
+              "value": "={{ $json.cveID }}",
+              "type": "string"
+            },
+            {
+              "id": "84e53734-94a6-4cf3-a883-3c1ee4d130ac",
+              "name": "cisa_kev",
+              "value": true,
+              "type": "boolean"
+            },
+            {
+              "id": "933a4704-e304-4469-a3bb-61cc8e450d31",
+              "name": "actively_exploited",
+              "value": true,
+              "type": "boolean"
+            },
+            {
+              "id": "37d4f439-1477-439c-bbde-05f296554aaf",
+              "name": "known_ransomware_use",
+              "value": "={{ $json.knownRansomwareCampaignUse || \"Unknown\" }}",
+              "type": "string"
+            },
+            {
+              "id": "4ede73ec-c0f3-4b26-a819-00dddee58661",
+              "name": "required_action",
+              "value": "={{ $json.requiredAction || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "3e2e2988-2410-460b-bd77-d4a1d434079b",
+              "name": "due_date",
+              "value": "={{ $json.dueDate || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "b255f46e-891b-4358-acfd-2f435331a50d",
+              "name": "vendor_project",
+              "value": "={{ $json.vendorProject || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "ad86744c-fa58-4f82-a30f-c15116e2c0b1",
+              "name": "product",
+              "value": "={{ $json.product || \"\" }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        768,
+        1136
+      ],
+      "id": "5b11e410-b511-403c-bf52-87f0a9b86052",
+      "name": "Normalize — CISA KEV"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "eb4c4d80-239d-4594-b89e-691348ae21db",
+              "leftValue": "={{ $json.dateAdded }}",
+              "rightValue": "={{ $now.minus({ days: 2 }).startOf(\"day\").toISO() }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "afterOrEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        544,
+        1168
+      ],
+      "id": "c73f2f04-4313-4a43-865c-d77a8f73420a",
+      "name": "Filter — Recent CISA KEV Additions"
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "url",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        1296,
+        768
+      ],
+      "id": "d7e3e1bf-92ee-44c9-af72-1dc69e00ab60",
+      "name": "Deduplicate — Current Batch"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map((item) => {\n  const article = { ...item.json };\n\n  const text = [\n    article.title,\n    article.summary_raw,\n    article.categories,\n    article.source,\n  ]\n    .filter(Boolean)\n    .join(\" \")\n    .toLowerCase();\n\n  let score = 0;\n  const reasons = [];\n\n  const addScore = (points, reason, condition) => {\n    if (condition) {\n      score += points;\n      reasons.push(`${reason} (+${points})`);\n    }\n  };\n\n  const isTrue = (value) =>\n    value === true || String(value).toLowerCase() === \"true\";\n\n  const isRawNvdVulnerability =\n    article.source_type === \"vulnerability\";\n\n  const cvss = Number(article.cvss_score || 0);\n\n  addScore(\n    50,\n    \"CISA Known Exploited Vulnerability\",\n    isTrue(article.cisa_kev)\n  );\n\n  addScore(\n    40,\n    \"Active exploitation\",\n    isTrue(article.actively_exploited) ||\n      /\\bactively exploited\\b|\\bexploited in the wild\\b/.test(text)\n  );\n\n  addScore(\n    35,\n    \"Zero-day\",\n    /\\bzero[- ]day\\b|\\b0[- ]day\\b/.test(text)\n  );\n\n  addScore(\n    25,\n    \"Ransomware\",\n    /\\bransomware\\b/.test(text)\n  );\n\n  addScore(\n    20,\n    \"Data breach\",\n    !isRawNvdVulnerability &&\n      /\\bdata breach\\b|\\bstolen data\\b|\\bdata leak\\b/.test(text)\n  );\n\n  addScore(\n    20,\n    \"DDoS or service disruption\",\n    !isRawNvdVulnerability &&\n      /\\bddos\\b|\\bdenial of service\\b|\\bservice disruption\\b/.test(text)\n  );\n\n  addScore(\n    15,\n    \"Malware or phishing activity\",\n    !isRawNvdVulnerability &&\n      /\\bmalware\\b|\\bbotnet\\b|\\bphishing\\b|\\binfostealer\\b|\\bstealer\\b/.test(text)\n  );\n\n  addScore(\n    15,\n    \"Credential or identity threat\",\n    !isRawNvdVulnerability &&\n      /\\bcredential theft\\b|\\bstolen credentials\\b|\\bidentity attack\\b|\\baccount takeover\\b/.test(text)\n  );\n\n  addScore(\n    25,\n    \"CVSS 9.0 or higher\",\n    cvss >= 9\n  );\n\n  addScore(\n    15,\n    \"SOC or detection relevance\",\n    !isRawNvdVulnerability &&\n      /\\bsoc\\b|\\bdetection\\b|\\bsiem\\b|\\bsysmon\\b|\\bsigma\\b|\\byara\\b|\\bioc\\b/.test(text)\n  );\n\n  addScore(\n    10,\n    \"Microsoft or Windows relevance\",\n    /\\bmicrosoft\\b|\\bwindows\\b|\\bactive directory\\b|\\bentra\\b/.test(text)\n  );\n\n  addScore(\n    10,\n    \"Linux relevance\",\n    /\\blinux\\b|\\bubuntu\\b|\\bdebian\\b|\\bred hat\\b|\\brhel\\b/.test(text)\n  );\n\n  addScore(\n    10,\n    \"Cloud relevance\",\n    /\\baws\\b|\\bazure\\b|\\bcloud\\b|\\bkubernetes\\b|\\bcontainer\\b/.test(text)\n  );\n\n  addScore(\n    10,\n    \"MITRE ATT&CK\",\n    /\\bmitre\\b|\\batt&ck\\b/.test(text)\n  );\n\n  const published = Date.parse(article.published_at);\n\n  addScore(\n    10,\n    \"Published within 24 hours\",\n    Number.isFinite(published) &&\n      published <= Date.now() &&\n      Date.now() - published <= 24 * 60 * 60 * 1000\n  );\n\n  if (!article.cve_id) {\n    const match = text.match(/\\bcve-\\d{4}-\\d{4,}\\b/i);\n    article.cve_id = match ? match[0].toUpperCase() : \"\";\n  }\n\n  article.priority_score = Math.min(score, 100);\n\n  article.priority_level =\n    article.priority_score >= 75\n      ? \"CRITICAL\"\n      : article.priority_score >= 50\n        ? \"HIGH\"\n        : article.priority_score >= 25\n          ? \"MEDIUM\"\n          : \"LOW\";\n\n  article.score_reasons = reasons;\n\n  return { json: article };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1744,
+        768
+      ],
+      "id": "6c9e125e-db28-4453-be71-ab1c1d15e98e",
+      "name": "Score — Cyber Priority"
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "priority_score",
+              "order": "descending"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1968,
+        768
+      ],
+      "id": "b22b433f-9880-4be6-a9e2-6c220f0fc75e",
+      "name": "Sort — Highest Priority First"
+    },
+    {
+      "parameters": {
+        "maxItems": 10
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        2192,
+        768
+      ],
+      "id": "76f75d24-acfb-4c78-9160-62f4ba9d88d4",
+      "name": "Select — Top 10"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map((item, index) => {\n  const story = { ...item.json };\n\n  const text = [\n    story.title,\n    story.summary_raw,\n    story.categories,\n  ]\n    .filter(Boolean)\n    .join(\" \")\n    .toLowerCase();\n\n  let reportCategory = \"General Cybersecurity\";\n\n  if (\n    story.source_type === \"known_exploited_vulnerability\" ||\n    story.source_type === \"vulnerability\" ||\n    story.cve_id\n  ) {\n    reportCategory = \"Vulnerability\";\n  } else if (/\\bransomware\\b/.test(text)) {\n    reportCategory = \"Ransomware\";\n  } else if (\n    /\\bdata breach\\b|\\bstolen data\\b|\\bdata leak\\b/.test(text)\n  ) {\n    reportCategory = \"Data Breach\";\n  } else if (\n    /\\bddos\\b|\\bdenial of service\\b|\\bservice disruption\\b/.test(text)\n  ) {\n    reportCategory = \"DDoS / Availability\";\n  } else if (\n    /\\bmalware\\b|\\bbotnet\\b|\\bphishing\\b|\\binfostealer\\b|\\bstealer\\b/.test(text)\n  ) {\n    reportCategory = \"Threat Activity\";\n  } else if (\n    /\\baws\\b|\\bazure\\b|\\bcloud\\b|\\bkubernetes\\b|\\bcontainer\\b/.test(text)\n  ) {\n    reportCategory = \"Cloud Security\";\n  } else if (\n    /\\bidentity\\b|\\bcredential\\b|\\bactive directory\\b|\\bentra\\b/.test(text)\n  ) {\n    reportCategory = \"Identity Security\";\n  }\n\n  const cleanSummary = String(story.summary_raw || \"\")\n    .replace(/<[^>]*>/g, \" \")\n    .replace(/\\s+/g, \" \")\n    .trim();\n\n  story.rank = index + 1;\n  story.report_category = reportCategory;\n  story.summary_clean =\n    cleanSummary.length > 600\n      ? `${cleanSummary.slice(0, 597)}...`\n      : cleanSummary;\n\n  return { json: story };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2416,
+        768
+      ],
+      "id": "f990dbbd-1671-4e65-847d-68754b137d6b",
+      "name": "Prepare — Ranked Stories"
+    },
+    {
+      "parameters": {
+        "jsCode": "const stories = items.map((item) => item.json);\n\nconst escapeHtml = (value) =>\n  String(value ?? \"\")\n    .replace(/&/g, \"&amp;\")\n    .replace(/</g, \"&lt;\")\n    .replace(/>/g, \"&gt;\")\n    .replace(/\"/g, \"&quot;\")\n    .replace(/'/g, \"&#039;\");\n\nconst safeUrl = (value) => {\n  try {\n    const url = new URL(String(value || \"\"));\n    return [\"http:\", \"https:\"].includes(url.protocol)\n      ? url.toString()\n      : \"#\";\n  } catch {\n    return \"#\";\n  }\n};\n\nconst getNodeCount = (nodeName, fallback = 0) => {\n  try {\n    return $(nodeName).all().length;\n  } catch {\n    return fallback;\n  }\n};\n\nconst takeawayFor = (category) => {\n  const takeaways = {\n    Vulnerability:\n      \"Review affected products, confirm exposure, and monitor vendor remediation guidance.\",\n    \"Data Breach\":\n      \"Assess whether your organization or users are exposed and monitor for credential abuse or follow-on fraud.\",\n    \"DDoS / Availability\":\n      \"Review availability controls, upstream protection, alerting, and incident-response procedures.\",\n    \"Threat Activity\":\n      \"Review available indicators and detection opportunities, then compare them with current endpoint and network visibility.\",\n    Ransomware:\n      \"Review initial-access controls, backup readiness, endpoint detections, and lateral-movement monitoring.\",\n    \"Cloud Security\":\n      \"Review affected cloud services, identities, permissions, logging, and configuration exposure.\",\n    \"Identity Security\":\n      \"Review authentication logs, privileged access, MFA coverage, and suspicious account activity.\",\n    \"General Cybersecurity\":\n      \"Review the original reporting and determine whether it affects current systems, projects, or learning priorities.\",\n  };\n\n  return takeaways[category] || takeaways[\"General Cybersecurity\"];\n};\n\nconst priorityColors = {\n  CRITICAL: {\n    background: \"#fee2e2\",\n    border: \"#dc2626\",\n    text: \"#991b1b\",\n  },\n  HIGH: {\n    background: \"#ffedd5\",\n    border: \"#ea580c\",\n    text: \"#9a3412\",\n  },\n  MEDIUM: {\n    background: \"#fef3c7\",\n    border: \"#d97706\",\n    text: \"#92400e\",\n  },\n  LOW: {\n    background: \"#e0f2fe\",\n    border: \"#0284c7\",\n    text: \"#075985\",\n  },\n};\n\nconst reportDate = new Intl.DateTimeFormat(\"en-CA\", {\n  timeZone: \"America/Toronto\",\n  year: \"numeric\",\n  month: \"long\",\n  day: \"numeric\",\n  weekday: \"long\",\n}).format(new Date());\n\nconst subjectDate = new Intl.DateTimeFormat(\"en-CA\", {\n  timeZone: \"America/Toronto\",\n  year: \"numeric\",\n  month: \"short\",\n  day: \"numeric\",\n}).format(new Date());\n\nconst mergedCount = getNodeCount(\n  \"Merge — Fresh Articles\",\n  stories.length\n);\n\nconst analyzedCount = getNodeCount(\n  \"Deduplicate — Current Batch\",\n  stories.length\n);\n\nconst duplicatesRemoved = Math.max(\n  0,\n  mergedCount - analyzedCount\n);\n\nconst priorityCounts = stories.reduce(\n  (counts, story) => {\n    const level = story.priority_level || \"LOW\";\n    counts[level] = (counts[level] || 0) + 1;\n    return counts;\n  },\n  { CRITICAL: 0, HIGH: 0, MEDIUM: 0, LOW: 0 }\n);\n\nconst categoryCounts = stories.reduce((counts, story) => {\n  const category =\n    story.report_category || \"General Cybersecurity\";\n\n  counts[category] = (counts[category] || 0) + 1;\n  return counts;\n}, {});\n\nconst storyCards = stories\n  .map((story) => {\n    const level = story.priority_level || \"LOW\";\n    const colors =\n      priorityColors[level] || priorityColors.LOW;\n\n    const reasons = Array.isArray(story.score_reasons)\n      ? story.score_reasons.join(\" · \")\n      : String(story.score_reasons || \"General relevance\");\n\n    const cveLine = story.cve_id\n      ? `\n        <div style=\"margin-top:8px;\">\n          <strong>CVE:</strong>\n          ${escapeHtml(story.cve_id)}\n        </div>\n      `\n      : \"\";\n\n    return `\n      <div style=\"\n        margin:0 0 22px 0;\n        padding:22px;\n        background:#ffffff;\n        border:1px solid #dbe4ee;\n        border-left:6px solid ${colors.border};\n        border-radius:10px;\n      \">\n        <div style=\"margin-bottom:12px;\">\n          <span style=\"\n            display:inline-block;\n            padding:4px 9px;\n            margin-right:8px;\n            border-radius:999px;\n            background:${colors.background};\n            color:${colors.text};\n            font-size:12px;\n            font-weight:700;\n          \">\n            ${escapeHtml(level)}\n          </span>\n\n          <span style=\"\n            color:#475569;\n            font-size:13px;\n            font-weight:600;\n          \">\n            #${escapeHtml(story.rank)}\n            · ${escapeHtml(story.report_category)}\n            · Score ${escapeHtml(story.priority_score)}/100\n          </span>\n        </div>\n\n        <h2 style=\"\n          margin:0 0 10px 0;\n          color:#0f172a;\n          font-size:21px;\n          line-height:1.35;\n        \">\n          ${escapeHtml(story.title)}\n        </h2>\n\n        <div style=\"\n          margin-bottom:16px;\n          color:#64748b;\n          font-size:13px;\n        \">\n          Source: ${escapeHtml(story.source)}\n          · Published: ${escapeHtml(story.published_at)}\n        </div>\n\n        <h3 style=\"\n          margin:0 0 6px 0;\n          color:#334155;\n          font-size:14px;\n          text-transform:uppercase;\n        \">\n          What happened\n        </h3>\n\n        <p style=\"\n          margin:0 0 16px 0;\n          color:#334155;\n          font-size:15px;\n          line-height:1.65;\n        \">\n          ${escapeHtml(\n            story.summary_clean ||\n              \"No summary was supplied by the source.\"\n          )}\n        </p>\n\n        <h3 style=\"\n          margin:0 0 6px 0;\n          color:#334155;\n          font-size:14px;\n          text-transform:uppercase;\n        \">\n          Why it ranked\n        </h3>\n\n        <p style=\"\n          margin:0 0 16px 0;\n          color:#334155;\n          font-size:14px;\n          line-height:1.55;\n        \">\n          ${escapeHtml(reasons)}\n        </p>\n\n        <h3 style=\"\n          margin:0 0 6px 0;\n          color:#334155;\n          font-size:14px;\n          text-transform:uppercase;\n        \">\n          SOC takeaway\n        </h3>\n\n        <p style=\"\n          margin:0;\n          color:#334155;\n          font-size:14px;\n          line-height:1.55;\n        \">\n          ${escapeHtml(\n            takeawayFor(story.report_category)\n          )}\n        </p>\n\n        ${cveLine}\n\n        <div style=\"margin-top:18px;\">\n          <a\n            href=\"${escapeHtml(safeUrl(story.url))}\"\n            style=\"\n              display:inline-block;\n              padding:10px 15px;\n              border-radius:7px;\n              background:#1d4ed8;\n              color:#ffffff;\n              font-size:14px;\n              font-weight:700;\n              text-decoration:none;\n            \"\n          >\n            Read original source\n          </a>\n        </div>\n      </div>\n    `;\n  })\n  .join(\"\");\n\nconst categoryRows = Object.entries(categoryCounts)\n  .sort((a, b) => b[1] - a[1])\n  .map(\n    ([category, count]) => `\n      <tr>\n        <td style=\"\n          padding:7px 10px;\n          border-bottom:1px solid #e2e8f0;\n        \">\n          ${escapeHtml(category)}\n        </td>\n        <td style=\"\n          padding:7px 10px;\n          border-bottom:1px solid #e2e8f0;\n          text-align:right;\n          font-weight:700;\n        \">\n          ${escapeHtml(count)}\n        </td>\n      </tr>\n    `\n  )\n  .join(\"\");\n\nconst html = `\n<!doctype html>\n<html>\n  <body style=\"\n    margin:0;\n    padding:0;\n    background:#f1f5f9;\n    font-family:Arial,Helvetica,sans-serif;\n  \">\n    <div style=\"\n      max-width:760px;\n      margin:0 auto;\n      padding:24px 14px 40px;\n    \">\n      <div style=\"\n        padding:28px;\n        background:#0f172a;\n        border-radius:12px 12px 0 0;\n        color:#ffffff;\n      \">\n        <div style=\"\n          margin-bottom:6px;\n          color:#93c5fd;\n          font-size:13px;\n          font-weight:700;\n          letter-spacing:1.5px;\n          text-transform:uppercase;\n        \">\n          Project Daedalus\n        </div>\n\n        <h1 style=\"\n          margin:0 0 8px 0;\n          font-size:30px;\n          line-height:1.2;\n        \">\n          Cyber Intelligence Daily\n        </h1>\n\n        <div style=\"\n          color:#cbd5e1;\n          font-size:15px;\n        \">\n          ${escapeHtml(reportDate)}\n        </div>\n      </div>\n\n      <div style=\"\n        padding:22px 28px;\n        margin-bottom:22px;\n        background:#e2e8f0;\n        border-radius:0 0 12px 12px;\n      \">\n        <div style=\"\n          margin-bottom:12px;\n          color:#0f172a;\n          font-size:16px;\n          font-weight:700;\n        \">\n          Daily overview\n        </div>\n\n        <div style=\"\n          color:#334155;\n          font-size:14px;\n          line-height:1.8;\n        \">\n          Sources checked: <strong>8</strong><br>\n          Articles analyzed:\n          <strong>${escapeHtml(analyzedCount)}</strong><br>\n          Duplicates removed:\n          <strong>${escapeHtml(duplicatesRemoved)}</strong><br>\n          Stories selected:\n          <strong>${escapeHtml(stories.length)}</strong><br>\n          Critical:\n          <strong>${escapeHtml(priorityCounts.CRITICAL)}</strong>\n          · High:\n          <strong>${escapeHtml(priorityCounts.HIGH)}</strong>\n          · Medium:\n          <strong>${escapeHtml(priorityCounts.MEDIUM)}</strong>\n          · Low:\n          <strong>${escapeHtml(priorityCounts.LOW)}</strong>\n        </div>\n      </div>\n\n      ${storyCards}\n\n      <div style=\"\n        padding:22px;\n        background:#ffffff;\n        border:1px solid #dbe4ee;\n        border-radius:10px;\n      \">\n        <h2 style=\"\n          margin:0 0 12px 0;\n          color:#0f172a;\n          font-size:18px;\n        \">\n          Category summary\n        </h2>\n\n        <table style=\"\n          width:100%;\n          border-collapse:collapse;\n          color:#334155;\n          font-size:14px;\n        \">\n          ${categoryRows}\n        </table>\n      </div>\n\n      <p style=\"\n        margin:24px 0 0;\n        color:#64748b;\n        font-size:12px;\n        line-height:1.5;\n        text-align:center;\n      \">\n        Generated automatically by Project Daedalus.\n        Rankings are deterministic and should support,\n        not replace, analyst judgment.\n      </p>\n    </div>\n  </body>\n</html>\n`;\n\nreturn [\n  {\n    json: {\n      subject: `🛡️ Cyber Intelligence Daily — ${subjectDate}`,\n      html,\n      report_date: reportDate,\n      sources_checked: 8,\n      articles_analyzed: analyzedCount,\n      duplicates_removed: duplicatesRemoved,\n      articles_selected: stories.length,\n      critical_count: priorityCounts.CRITICAL,\n      high_count: priorityCounts.HIGH,\n      medium_count: priorityCounts.MEDIUM,\n      low_count: priorityCounts.LOW,\n      category_counts: categoryCounts,\n    },\n  },\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2608,
+        768
+      ],
+      "id": "f2249d42-4469-4559-908c-354afb308f0c",
+      "name": "Build — HTML Intelligence Report"
+    },
+    {
+      "parameters": {
+        "fromEmail": "YOUR_GMAIL_ADDRESS@example.com",
+        "toEmail": "YOUR_GMAIL_ADDRESS@example.com",
+        "subject": "={{ $json.subject }}",
+        "html": "={{ $json.html }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        2800,
+        768
+      ],
+      "id": "1a7891ea-ce45-4d0c-8eda-a8809cdc8401",
+      "name": "Email — Cyber Intelligence Daily"
+    },
+    {
+      "parameters": {
+        "operation": "removeItemsSeenInPreviousExecutions",
+        "dedupeValue": "={{ $json.url }}",
+        "options": {
+          "scope": "node",
+          "historySize": 10000
+        }
+      },
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        1520,
+        768
+      ],
+      "id": "c911ec90-3e03-49e9-98ee-a6ffba4099ec",
+      "name": "Deduplicate — Previously Processed"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 7
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -448,
+        400
+      ],
+      "id": "49a12546-900e-4612-8da2-7ee4db004fec",
+      "name": "Schedule — Daily at 7 AM"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Source — SANS ISC",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — BleepingComputer",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — Microsoft Security",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — Cisco Talos",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — Unit 42",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — Cloudflare",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — NIST NVD CVEs",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — CISA KEV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Source — BleepingComputer": {
+      "main": [
+        [
+          {
+            "node": "Normalize — BleepingComputer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize — BleepingComputer": {
+      "main": [
+        [
+          {
+            "node": "Filter — BleepingComputer — Last 24 Hours",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Source — SANS ISC": {
+      "main": [
+        [
+          {
+            "node": "Normalize — SANS ISC",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter — BleepingComputer — Last 24 Hours": {
+      "main": [
+        [
+          {
+            "node": "Merge — Fresh Articles",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Normalize — SANS ISC": {
+      "main": [
+        [
+          {
+            "node": "Filter — SANS ISC — Last 24 Hours",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter — SANS ISC — Last 24 Hours": {
+      "main": [
+        [
+          {
+            "node": "Merge — Fresh Articles",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Source — Microsoft Security": {
+      "main": [
+        [
+          {
+            "node": "Normalize — Microsoft Security",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize — Microsoft Security": {
+      "main": [
+        [
+          {
+            "node": "Filter — Microsoft Security — Last 24 Hours",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Source — Cisco Talos": {
+      "main": [
+        [
+          {
+            "node": "Normalize — Cisco Talos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize — Cisco Talos": {
+      "main": [
+        [
+          {
+            "node": "Filter — Cisco Talos — Last 24 Hours",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter — Cisco Talos — Last 24 Hours": {
+      "main": [
+        [
+          {
+            "node": "Merge — Fresh Articles",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Source — Unit 42": {
+      "main": [
+        [
+          {
+            "node": "Normalize — Unit 42",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize — Unit 42": {
+      "main": [
+        [
+          {
+            "node": "Filter — Unit 42 — Last 24 Hours",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Source — Cloudflare": {
+      "main": [
+        [
+          {
+            "node": "Normalize — Cloudflare",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize — Cloudflare": {
+      "main": [
+        [
+          {
+            "node": "Filter — Cloudflare — Last 24 Hours",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Source — NIST NVD CVEs": {
+      "main": [
+        [
+          {
+            "node": "Split — NVD Vulnerabilities",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split — NVD Vulnerabilities": {
+      "main": [
+        [
+          {
+            "node": "Normalize — NIST NVD CVEs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Source — CISA KEV": {
+      "main": [
+        [
+          {
+            "node": "Split — CISA KEV Entries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split — CISA KEV Entries": {
+      "main": [
+        [
+          {
+            "node": "Filter — Recent CISA KEV Additions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter — Recent CISA KEV Additions": {
+      "main": [
+        [
+          {
+            "node": "Normalize — CISA KEV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter — Microsoft Security — Last 24 Hours": {
+      "main": [
+        [
+          {
+            "node": "Merge — Fresh Articles",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "Filter — Unit 42 — Last 24 Hours": {
+      "main": [
+        [
+          {
+            "node": "Merge — Fresh Articles",
+            "type": "main",
+            "index": 4
+          }
+        ]
+      ]
+    },
+    "Filter — Cloudflare — Last 24 Hours": {
+      "main": [
+        [
+          {
+            "node": "Merge — Fresh Articles",
+            "type": "main",
+            "index": 5
+          }
+        ]
+      ]
+    },
+    "Normalize — NIST NVD CVEs": {
+      "main": [
+        [
+          {
+            "node": "Merge — Fresh Articles",
+            "type": "main",
+            "index": 6
+          }
+        ]
+      ]
+    },
+    "Normalize — CISA KEV": {
+      "main": [
+        [
+          {
+            "node": "Merge — Fresh Articles",
+            "type": "main",
+            "index": 7
+          }
+        ]
+      ]
+    },
+    "Merge — Fresh Articles": {
+      "main": [
+        [
+          {
+            "node": "Deduplicate — Current Batch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deduplicate — Current Batch": {
+      "main": [
+        [
+          {
+            "node": "Deduplicate — Previously Processed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Score — Cyber Priority": {
+      "main": [
+        [
+          {
+            "node": "Sort — Highest Priority First",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort — Highest Priority First": {
+      "main": [
+        [
+          {
+            "node": "Select — Top 10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select — Top 10": {
+      "main": [
+        [
+          {
+            "node": "Prepare — Ranked Stories",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare — Ranked Stories": {
+      "main": [
+        [
+          {
+            "node": "Build — HTML Intelligence Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build — HTML Intelligence Report": {
+      "main": [
+        [
+          {
+            "node": "Email — Cyber Intelligence Daily",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deduplicate — Previously Processed": {
+      "main": [
+        [
+          {
+            "node": "Score — Cyber Priority",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule — Daily at 7 AM": {
+      "main": [
+        [
+          {
+            "node": "Source — SANS ISC",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — BleepingComputer",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — Microsoft Security",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — Cisco Talos",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — Unit 42",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — Cloudflare",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — NIST NVD CVEs",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Source — CISA KEV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "timezone": "America/Toronto"
+  },
+  "tags": []
+}
