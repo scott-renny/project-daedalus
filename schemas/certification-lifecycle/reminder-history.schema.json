@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/scott-renny/project-daedalus/schemas/certification-lifecycle/reminder-history.schema.json",
+  "title": "Certification Reminder History",
+  "description": "Idempotency and delivery history for lifecycle notifications.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "reminder_id",
+    "certification_id",
+    "reminder_type",
+    "scheduled_for",
+    "delivery_status",
+    "created_at"
+  ],
+  "properties": {
+    "reminder_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "certification_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "reminder_type": {
+      "type": "string",
+      "enum": [
+        "target_exam",
+        "renewal_window",
+        "expiration",
+        "ce_progress",
+        "rule_reverification"
+      ]
+    },
+    "threshold_days": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "scheduled_for": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sent_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "delivery_status": {
+      "type": "string",
+      "enum": [
+        "scheduled",
+        "sent",
+        "failed",
+        "skipped"
+      ]
+    },
+    "message_reference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 255,
+      "description": "Non-secret delivery correlation reference."
+    },
+    "error_summary": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 1000
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

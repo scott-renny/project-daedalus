@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/scott-renny/project-daedalus/schemas/certification-lifecycle/ce-activity.schema.json",
+  "title": "Continuing-Education Activity",
+  "description": "An activity that may contribute credits toward certification renewal.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "activity_id",
+    "certification_id",
+    "activity_name",
+    "provider",
+    "completed_date",
+    "credits_claimed",
+    "status",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "activity_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "certification_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "activity_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "provider": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 150
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "credits_claimed": {
+      "type": "number",
+      "minimum": 0
+    },
+    "credits_approved": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "completed",
+        "submitted",
+        "approved",
+        "rejected"
+      ]
+    },
+    "evidence_reference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500,
+      "description": "Private pointer only; never embed evidence or secrets in public exports."
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 2000
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

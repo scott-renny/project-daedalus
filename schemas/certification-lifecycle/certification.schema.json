@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/scott-renny/project-daedalus/schemas/certification-lifecycle/certification.schema.json",
+  "title": "Certification Lifecycle Record",
+  "description": "A privacy-conscious record for one planned or earned certification.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "certification_id",
+    "vendor",
+    "certification_name",
+    "status",
+    "does_expire",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "certification_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Stable non-secret identifier."
+    },
+    "vendor": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "certification_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 150
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "in_progress",
+        "active",
+        "expired",
+        "retired"
+      ]
+    },
+    "target_exam_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "earned_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "does_expire": {
+      "type": "boolean"
+    },
+    "expiration_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "renewal_rule_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "public_summary": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500,
+      "description": "Optional sanitized portfolio-safe summary."
+    },
+    "private_notes": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 2000,
+      "description": "Operational notes; exclude from public exports."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "does_expire": {
+            "const": true
+          }
+        },
+        "required": [
+          "does_expire"
+        ]
+      },
+      "then": {
+        "required": [
+          "expiration_date"
+        ],
+        "properties": {
+          "expiration_date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  ]
+}

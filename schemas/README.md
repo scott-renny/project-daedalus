@@ -1,15 +1,18 @@
 # Schemas
 
-This directory will contain versioned, sanitized data models shared by Daedalus modules.
+Versioned, sanitized data models shared by Daedalus modules live here.
 
-Expected schemas include:
+## Available
 
-- cybersecurity intelligence record
-- certification lifecycle record
-- portfolio evidence record
-- learning result
-- career skill-demand observation
-- automation test case/result
-- technical-skill/evidence relationship
+- [Certification Lifecycle](certification-lifecycle/) — DAE-003 schema foundation
 
-Schemas should separate public example fields from sensitive operational values.
+## Planned
+
+- Cybersecurity intelligence record
+- Portfolio evidence record
+- Learning result
+- Career skill-demand observation
+- Automation test case/result
+- Technical-skill/evidence relationship
+
+Schemas separate public example fields from sensitive operational values. Real personal records, credentials, evidence, and secrets are never committed.

@@ -5,6 +5,7 @@
 **Project status:** 🟡 Active Development  
 **Platform foundation (DAE-001):** 🟢 Complete  
 **Module 01 (DAE-002):** 🟢 Cybersecurity Intelligence Pipeline complete  
+**Current work (DAE-003):** 🟡 Certification Lifecycle Manager  
 **Primary orchestration:** n8n  
 **Repository:** Public portfolio and engineering documentation
 
@@ -28,7 +29,7 @@ Daedalus is intentionally **not** a replacement for specialist platforms such as
 |---|---|---|---|
 | 01 | Cybersecurity Intelligence Pipeline | 🟢 Complete | Aggregate, normalize, deduplicate, rank, summarize, and report cybersecurity intelligence. |
 | 02 | Portfolio Evidence Engine | ⚪ Planned | Capture project accomplishments and convert them into evidence-backed portfolio and interview material. |
-| 03 | Certification Lifecycle Manager | ⚪ Planned | Track certifications, exam status, issue/expiry dates, renewal requirements, CE/CEU progress, and reminders. |
+| 03 | Certification Lifecycle Manager | 🟡 In Development | Track certifications, exam status, issue/expiry dates, renewal requirements, CE/CEU progress, and reminders. |
 | 04 | Adaptive Learning Engine | ⚪ Planned | Use study performance and knowledge gaps to prioritize future learning. |
 | 05 | Career Intelligence | ⚪ Planned | Analyze relevant job-market demand and compare requested skills with evidence-backed capabilities. |
 | 06 | Documentation & ADR Engine | ⚪ Planned | Detect documentation drift and maintain architecture decision records and proposed documentation updates. |
@@ -105,6 +106,10 @@ The secure self-hosted n8n foundation is established, including HTTPS and revers
 ### DAE-002 — Module 01: Cybersecurity Intelligence Pipeline — 🟢 Complete
 
 Cyber Intelligence Daily v1 is implemented, tested, scheduled, and documented. It ingests eight trusted RSS/API sources, normalizes and filters records, removes duplicates across current and previous executions, applies deterministic priority scoring, selects the Top 10 stories, generates a portfolio-quality HTML briefing, delivers it through Gmail SMTP, and routes failures to a companion alert workflow. A sanitized, inactive-by-default workflow export and implementation guide are published in this repository.
+
+### DAE-003 — Module 03: Certification Lifecycle Manager — 🟡 In Development
+
+Current work is defining a privacy-conscious, storage-independent lifecycle model for certifications, vendor renewal rules, continuing-education activities, and reminder history before implementing the automation.
 
 ## Portfolio Objectives
 

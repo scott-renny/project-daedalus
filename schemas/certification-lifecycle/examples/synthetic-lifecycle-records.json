@@ -1,0 +1,70 @@
+{
+  "note": "Synthetic examples only. No real credential or personal data.",
+  "certifications": [
+    {
+      "certification_id": "cert-example-security",
+      "vendor": "Example Security Vendor",
+      "certification_name": "Example Security Professional",
+      "status": "active",
+      "target_exam_date": null,
+      "earned_date": "2026-01-15",
+      "does_expire": true,
+      "expiration_date": "2029-01-15",
+      "renewal_rule_id": "rule-example-security-2026",
+      "public_summary": "Active security certification maintained through continuing education.",
+      "private_notes": null,
+      "created_at": "2026-01-15T14:00:00Z",
+      "updated_at": "2026-08-17T10:00:00Z"
+    }
+  ],
+  "renewal_rules": [
+    {
+      "rule_id": "rule-example-security-2026",
+      "vendor": "Example Security Vendor",
+      "certification_name": "Example Security Professional",
+      "validity_months": 36,
+      "renewal_window_days": 180,
+      "renewal_methods": [
+        "continuing_education",
+        "renewal_fee"
+      ],
+      "ce_credits_required": 50,
+      "renewal_fee_amount": 100,
+      "renewal_fee_currency": "USD",
+      "effective_from": "2026-01-01",
+      "source_url": "https://example.com/certification-renewal",
+      "verified_at": "2026-08-17T10:00:00Z",
+      "notes": "Synthetic rule used to demonstrate the schema."
+    }
+  ],
+  "ce_activities": [
+    {
+      "activity_id": "ceu-example-001",
+      "certification_id": "cert-example-security",
+      "activity_name": "Example Secure Automation Course",
+      "provider": "Example Training Provider",
+      "completed_date": "2026-06-20",
+      "credits_claimed": 10,
+      "credits_approved": 10,
+      "status": "approved",
+      "evidence_reference": "private://evidence/ceu-example-001",
+      "notes": "Synthetic activity.",
+      "created_at": "2026-06-20T18:00:00Z",
+      "updated_at": "2026-07-01T12:00:00Z"
+    }
+  ],
+  "reminder_history": [
+    {
+      "reminder_id": "reminder-example-001",
+      "certification_id": "cert-example-security",
+      "reminder_type": "ce_progress",
+      "threshold_days": 365,
+      "scheduled_for": "2028-01-15T12:00:00Z",
+      "sent_at": null,
+      "delivery_status": "scheduled",
+      "message_reference": null,
+      "error_summary": null,
+      "created_at": "2026-08-17T10:00:00Z"
+    }
+  ]
+}
