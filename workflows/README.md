@@ -1,21 +1,21 @@
 # Workflows
 
-Sanitized n8n workflow exports and module-specific documentation will live here.
+Sanitized n8n workflow exports and module-specific documentation live here.
 
-Planned directories:
+## Modules
 
-- `01-cyber-intelligence/`
-- `02-portfolio-evidence/`
-- `03-certification-lifecycle/`
-- `04-adaptive-learning/`
-- `05-career-intelligence/`
-- `06-documentation-adr/`
-- `07-engineering-reporter/`
-- `08-reliability-lab/`
-- `09-digital-twin/`
-- `10-gitops-recovery/`
-- `11-command-center/`
+- [01 — Cyber Intelligence](01-cyber-intelligence/) — in development
+- `02-portfolio-evidence/` — planned
+- `03-certification-lifecycle/` — planned
+- `04-adaptive-learning/` — planned
+- `05-career-intelligence/` — planned
+- `06-documentation-adr/` — planned
+- `07-engineering-reporter/` — planned
+- `08-reliability-lab/` — planned
+- `09-digital-twin/` — planned
+- `10-gitops-recovery/` — planned
+- `11-command-center/` — planned
 
 ## Publication Rule
 
-Never commit a workflow export directly from production without inspecting and sanitizing it. Replace credentials, tokens, private URLs, internal addresses, personal identifiers, and sensitive sample data with documented placeholders.
+Never commit a workflow export directly from production without inspecting and sanitizing it. Replace credentials, tokens, private URLs, internal addresses, personal identifiers, workflow/instance IDs, and sensitive sample data with documented placeholders. Public exports should be inactive by default.

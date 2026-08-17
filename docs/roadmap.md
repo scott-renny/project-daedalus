@@ -8,23 +8,23 @@ This roadmap is intentionally capability-driven. A module is marked complete onl
 - [x] Define project mission and architectural boundaries
 - [x] Establish public-repository security policy
 - [x] Define initial module roadmap
-- [ ] Establish n8n deployment baseline
-- [ ] Establish secrets/configuration conventions
-- [ ] Establish workflow export/sanitization process
+- [x] Establish n8n deployment baseline
+- [x] Establish secrets/configuration conventions
+- [x] Establish workflow export/sanitization process
 
 ## Phase 1 — Cybersecurity Intelligence Pipeline
 
-- [ ] Select trustworthy free sources
-- [ ] Schedule ingestion
-- [ ] Normalize records into a common schema
-- [ ] Deduplicate overlapping stories
-- [ ] Categorize stories
-- [ ] Rank relevance/importance
-- [ ] Generate concise summaries
-- [ ] Select Top 5/10 report content
-- [ ] Generate readable HTML email
-- [ ] Deliver report
-- [ ] Add execution/error handling
+- [x] Select trustworthy free sources
+- [x] Schedule ingestion
+- [x] Normalize records into a common schema
+- [x] Deduplicate overlapping stories
+- [x] Categorize stories
+- [x] Rank relevance/importance
+- [x] Generate concise summaries
+- [x] Select Top 5/10 report content
+- [x] Generate readable HTML email
+- [x] Deliver report
+- [x] Add execution/error handling
 - [ ] Archive sanitized result metadata
 - [ ] Document and test the workflow
 
