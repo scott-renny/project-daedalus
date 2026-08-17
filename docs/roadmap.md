@@ -35,9 +35,9 @@ This roadmap is intentionally capability-driven. A module is marked complete onl
 - [ ] Add a rolling seven-day Threat Trend Radar
 - [ ] Detect cross-source CVE and campaign confirmation
 
-## Phase 2 — Certification Lifecycle Manager
+## Phase 2 — Certification Lifecycle Manager — In Development
 
-- [ ] Certification data model
+- [x] Certification data model
 - [ ] Active / in-progress / planned states
 - [ ] Earned and expiry-date tracking
 - [ ] Vendor-specific renewal rules
