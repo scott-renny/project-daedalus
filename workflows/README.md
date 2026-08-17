@@ -4,7 +4,7 @@ Sanitized n8n workflow exports and module-specific documentation live here.
 
 ## Modules
 
-- [01 — Cyber Intelligence](01-cyber-intelligence/) — in development
+- [01 — Cyber Intelligence](01-cyber-intelligence/) — complete
 - `02-portfolio-evidence/` — planned
 - `03-certification-lifecycle/` — planned
 - `04-adaptive-learning/` — planned

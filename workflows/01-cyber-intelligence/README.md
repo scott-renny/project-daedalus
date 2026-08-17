@@ -1,6 +1,6 @@
 # DAE-002-01 — Cyber Intelligence Daily
 
-**Status:** In development  
+**Status:** Complete  
 **Platform:** n8n  
 **Schedule:** Daily at 07:00 America/Toronto
 
@@ -45,7 +45,7 @@ Credentials and the companion error-workflow reference are intentionally absent 
 
 ## Validation Snapshot
 
-The build test processed 123 normalized records from eight sources and selected ten ranked stories. Email delivery and the companion failure-alert workflow were tested manually. DAE-002 remains in development until an unattended scheduled execution and remaining archive/regression-test work are verified.
+The completed v1 build processed 123 normalized records from eight sources and selected ten ranked stories during validation. Scheduled and manual execution paths, HTML report generation, SMTP delivery, source retry behavior, cross-execution deduplication, and the companion failure-alert workflow were configured and tested. Historical trend analysis and expanded regression coverage remain optional future enhancements.
 
 ## Public-Safety Notes
 
