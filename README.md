@@ -2,6 +2,8 @@
 
 > Personal Automation & Intelligence Engineering Platform
 
+![n8n](https://img.shields.io/badge/n8n-orchestration-EA4B71) ![Automation](https://img.shields.io/badge/focus-automation-blue) ![APIs](https://img.shields.io/badge/integration-APIs-2EA44F) ![Status](https://img.shields.io/badge/status-active%20development-yellow)
+
 **Project status:** 🟡 Active Development  
 **Platform foundation (DAE-001):** 🟢 Complete  
 **Module 01 (DAE-002):** 🟢 Cybersecurity Intelligence Pipeline complete  
