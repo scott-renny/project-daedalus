@@ -35,17 +35,22 @@ This roadmap is intentionally capability-driven. A module is marked complete onl
 - [ ] Add a rolling seven-day Threat Trend Radar
 - [ ] Detect cross-source CVE and campaign confirmation
 
-## Phase 2 — Certification Lifecycle Manager — In Development
+## Phase 2 — Certification Lifecycle Manager — Complete
 
 - [x] Certification data model
-- [ ] Active / in-progress / planned states
-- [ ] Earned and expiry-date tracking
-- [ ] Vendor-specific renewal rules
-- [ ] CE/CEU requirements and progress
-- [ ] Renewal windows and escalation schedule
-- [ ] Evidence/verification metadata
-- [ ] Expiration reminders
-- [ ] Sanitized portfolio view
+- [x] Active / in-progress / planned states
+- [x] Earned and expiry-date tracking
+- [x] Vendor-specific renewal rules
+- [x] CE/CEU requirements and progress
+- [x] Renewal windows and urgency classification
+- [x] Privacy-conscious source and notes metadata
+- [x] Idempotent expiration reminders and delivery history
+- [x] Authenticated certification record form
+- [x] Dedicated PostgreSQL storage and least-privilege runtime access
+- [x] Automated, restore-verified PostgreSQL backups
+- [x] Failure-alert workflow
+- [x] Synthetic end-to-end validation and test-data cleanup
+- [x] Sanitized public documentation
 
 ## Phase 3 — Portfolio Evidence Engine
 
@@ -127,3 +132,4 @@ This roadmap is intentionally capability-driven. A module is marked complete onl
 - [ ] Hephaestus prepares branch/PR through coding-agent workflow
 - [ ] CI/tests/review gate changes
 - [ ] Daedalus records outcome and evidence
+

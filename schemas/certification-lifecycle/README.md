@@ -1,7 +1,7 @@
 # Certification Lifecycle Data Model
 
 **Work item:** DAE-003  
-**Status:** Schema foundation complete; automation in development
+**Status:** Complete and implemented
 
 This directory defines the storage-independent contract for the Certification Lifecycle Manager. Operational storage can change without changing what each record means.
 
@@ -38,4 +38,5 @@ Private operational fields include exact dates where desired, notes, evidence re
 
 Credential numbers, verification codes, account data, document contents, passwords, API keys, tokens, and recovery codes are not part of this model and must never be committed.
 
-The schemas define structure only. Real personal records remain outside the public repository.
+The schemas define the public-safe data contract used by the implemented workflows. Real personal records remain outside the public repository.
+

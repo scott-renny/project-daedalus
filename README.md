@@ -7,7 +7,7 @@
 **Project status:** 🟡 Active Development  
 **Platform foundation (DAE-001):** 🟢 Complete  
 **Module 01 (DAE-002):** 🟢 Cybersecurity Intelligence Pipeline complete  
-**Current work (DAE-003):** 🟡 Certification Lifecycle Manager  
+**Module 03 (DAE-003):** 🟢 Certification Lifecycle Manager complete
 **Primary orchestration:** n8n  
 **Repository:** Public portfolio and engineering documentation
 
@@ -31,7 +31,7 @@ Daedalus is intentionally **not** a replacement for specialist platforms such as
 |---|---|---|---|
 | 01 | Cybersecurity Intelligence Pipeline | 🟢 Complete | Aggregate, normalize, deduplicate, rank, summarize, and report cybersecurity intelligence. |
 | 02 | Portfolio Evidence Engine | ⚪ Planned | Capture project accomplishments and convert them into evidence-backed portfolio and interview material. |
-| 03 | Certification Lifecycle Manager | 🟡 In Development | Track certifications, exam status, issue/expiry dates, renewal requirements, CE/CEU progress, and reminders. |
+| 03 | Certification Lifecycle Manager | 🟢 Complete | Track certifications, issue/expiry dates, renewal requirements, CE/CEU progress, and deduplicated reminders. |
 | 04 | Adaptive Learning Engine | ⚪ Planned | Use study performance and knowledge gaps to prioritize future learning. |
 | 05 | Career Intelligence | ⚪ Planned | Analyze relevant job-market demand and compare requested skills with evidence-backed capabilities. |
 | 06 | Documentation & ADR Engine | ⚪ Planned | Detect documentation drift and maintain architecture decision records and proposed documentation updates. |
@@ -86,9 +86,11 @@ project-daedalus/
 │   └── adr/
 ├── workflows/
 │   ├── README.md
-│   └── 01-cyber-intelligence/
-│       ├── README.md
-│       └── DAE-002-01-cyber-intelligence-daily.sanitized.json
+│   ├── 01-cyber-intelligence/
+│   │   ├── README.md
+│   │   └── DAE-002-01-cyber-intelligence-daily.sanitized.json
+│   └── 03-certification-lifecycle/
+│       └── README.md
 ├── schemas/
 │   └── README.md
 ├── tests/
@@ -109,9 +111,9 @@ The secure self-hosted n8n foundation is established, including HTTPS and revers
 
 Cyber Intelligence Daily v1 is implemented, tested, scheduled, and documented. It ingests eight trusted RSS/API sources, normalizes and filters records, removes duplicates across current and previous executions, applies deterministic priority scoring, selects the Top 10 stories, generates a portfolio-quality HTML briefing, delivers it through Gmail SMTP, and routes failures to a companion alert workflow. A sanitized, inactive-by-default workflow export and implementation guide are published in this repository.
 
-### DAE-003 — Module 03: Certification Lifecycle Manager — 🟡 In Development
+### DAE-003 — Module 03: Certification Lifecycle Manager — 🟢 Complete
 
-Current work is defining a privacy-conscious, storage-independent lifecycle model for certifications, vendor renewal rules, continuing-education activities, and reminder history before implementing the automation.
+The Certification Lifecycle Manager is implemented, tested, and documented. It stores lifecycle records in a private PostgreSQL service, calculates renewal status and continuing-education progress, accepts authenticated record submissions, sends idempotent HTML reminders, records delivery outcomes, and routes workflow failures to a companion alert workflow. Least-privilege database access, restore-verified backups, synthetic validation, and removal of test data were verified before the module was closed. Real certification records and private infrastructure details remain outside this repository.
 
 ## Portfolio Objectives
 
@@ -127,3 +129,4 @@ Daedalus is intended to demonstrate practical experience with workflow orchestra
 ## License
 
 No license has been selected yet. Until one is added, normal copyright restrictions apply.
+
