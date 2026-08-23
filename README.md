@@ -7,7 +7,7 @@
 **Project status:** 🟡 Active Development  
 **Platform foundation (DAE-001):** 🟢 Complete  
 **Module 01 (DAE-002):** 🟢 Cybersecurity Intelligence Pipeline complete  
-**Module 03 (DAE-003):** 🟢 Certification Lifecycle Manager complete
+**Module 03 (DAE-003):** 🟢 Certification Lifecycle Manager complete  
 **Primary orchestration:** n8n  
 **Repository:** Public portfolio and engineering documentation
 
