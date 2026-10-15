@@ -1,8 +1,21 @@
+<div align="center">
+
 # Project Daedalus
+### Automation · Intelligence · Lifecycle Management
+
+![status: active development](https://img.shields.io/badge/status-active%20development-d97706?style=flat-square)
+![orchestration: n8n](https://img.shields.io/badge/orchestration-n8n-22d3ee?style=flat-square)
+
+[Architecture](docs/architecture.md) · [License](LICENSE)
+
+</div>
+
+[Design Principles](#design-principles) · [Modules](#modules) · [High-Level Architecture](#high-level-architecture) · [Relationship to Other Systems](#relationship-to-other-systems) · [Repository Layout](#repository-layout) · [Current Milestone](#current-milestone)
+
+---
 
 > Personal Automation & Intelligence Engineering Platform
 
-![n8n](https://img.shields.io/badge/n8n-orchestration-EA4B71) ![Automation](https://img.shields.io/badge/focus-automation-blue) ![APIs](https://img.shields.io/badge/integration-APIs-2EA44F) ![Status](https://img.shields.io/badge/status-active%20development-yellow)
 
 **Project status:** 🟡 Active Development  
 **Platform foundation (DAE-001):** 🟢 Complete  
@@ -129,4 +142,3 @@ Daedalus is intended to demonstrate practical experience with workflow orchestra
 ## License
 
 No license has been selected yet. Until one is added, normal copyright restrictions apply.
-
