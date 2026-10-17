@@ -101,3 +101,39 @@ Daedalus may identify an engineering task or failed workflow and create a contro
 - **Secret:** passwords, API keys, tokens, private keys, n8n encryption material.
 
 Only Public data belongs in this repository.
+
+
+## Mermaid views of the documented baseline
+
+### Deployment and backup boundaries
+
+This view follows the Current n8n Deployment Baseline above. SQLite describes that recorded baseline; it is not a claim about a subsequently migrated instance or every module's storage.
+
+```mermaid
+flowchart LR
+  OP["Authorized operator"] --> PROXY["Existing Caddy HTTPS boundary"]
+  PROXY --> N8N["n8n: documented loopback-bound baseline"]
+  N8N --> VOL["Persistent application volume"]
+  VOL --> SQL["SQLite online backup"]
+  TIMER["Existing daily systemd timer"] --> SQL
+  SQL --> CHECK["Integrity check and bounded retention"]
+  CHECK --> BACKUP["Existing broader host backup scope"]
+```
+
+The environment file and existing encryption key remain protected outside Git. The diagram omits private endpoints and credentials. Arrows show data/operation relationships, not container startup ordering.
+
+### Implemented intelligence workflow
+
+```mermaid
+flowchart LR
+  SOURCES["Six RSS feeds plus NVD and KEV APIs"] --> NORMAL["Normalize and filter collection window"]
+  NORMAL --> DEDUP["Merge and deduplicate within and across runs"]
+  DEDUP --> SCORE["Deterministic scoring with reasons"]
+  SCORE --> TOP["Select highest-ranked stories"]
+  TOP --> REPORT["Build HTML briefing"]
+  REPORT --> SMTP["Deliver through SMTP"]
+  NORMAL -. Failure .-> ERROR["Separate error notification workflow"]
+  SMTP -. Failure .-> ERROR
+```
+
+Source retries and the separate error workflow remain operational concerns. This is the implemented daily-intelligence path; future AI classification, the Command Center and cross-platform engineering integrations are not shown as deployed.
